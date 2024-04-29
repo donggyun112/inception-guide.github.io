@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Nginx 설정 파일 설명</title>
+   <style>
+		body {
+			font-family: 'Noto Sans KR', sans-serif;
+			line-height: 1.6;
+			margin: 20px;
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 20px;
+		}
+		h1 {
+			color: #333;
+			font-size: 2em;
+			margin-bottom: 20px;
+			text-align: center;
+		}
+		h2 {
+			color: #666;
+			font-size: 1.5em;
+			margin-top: 40px;
+		}
+		p {
+			margin-bottom: 15px;
+		}
+		.code {
+			background-color: #f4f4f4;
+			padding: 20px;
+			border-radius: 5px;
+			font-family: 'Nanum Gothic Coding', monospace;
+			white-space: pre;
+			overflow-x: auto;
+			margin-bottom: 20px;
+		}
+		ul {
+			margin-bottom: 20px;
+			padding-left: 20px;
+		}
+		li {
+			margin-bottom: 10px;
+		}
+		code {
+			background-color: #eee;
+			padding: 2px 5px;
+			border-radius: 3px;
+		}
+	</style>
+</head>
+<body>
+   <h1>Nginx 설정 파일 설명</h1>
+
+   <h2>HTTPS 서버 설정</h2>
+   <p>이 블록은 HTTPS 서버를 설정합니다.</p>
+   <div class="code">
+server {
+	listen 443 ssl default_server;  # HTTPS 포트(443)에서 수신 대기하고 기본 서버로 동작
+	listen [::]:443 ssl default_server;  # IPv6 주소에 대해 HTTPS 포트(443)에서 수신 대기하고 기본 서버로 동작
+	server_name example.com;  # 서버의 도메인 이름 설정
+	
+	ssl_certificate /path/to/certificate.crt;  # SSL 인증서 파일 경로 설정
+	ssl_certificate_key /path/to/certificate.key;  # SSL 개인 키 파일 경로 설정
+	ssl_protocols TLSv1.2 TLSv1.3;  # 허용되는 SSL 프로토콜 설정
+	
+	root /var/www/html/wordpress;  # WordPress 설치 디렉토리의 루트 경로 설정
+	index index.php index.html index.htm index.nginx-debian.html;  # 우선순위에 따라 인덱스 파일 지정
+	
+	location / {
+		if ($scheme = "https") {  # HTTPS 체계인 경우
+			gzip off;  # gzip 압축 비활성화
+		}
+		try_files $uri $uri/ =404;  # 요청된 URI를 제공하거나, 찾을 수 없는 경우 404 오류로 폴백
+	}
+	
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;  # FastCGI 설정 파일 포함
+		# 소켓통신의 경우 -> fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;  # PHP-FPM 소켓으로 요청 전달
+		# 포트통신의 경우 -> fastcgi_pass ContainerName:port;  # PHP-FPM 포트로 요청 전달
+		fastcgi_intercept_errors on;  # FastCGI 오류 가로채기 활성화 Cgi에서 발생하는 오류를 Nginx에서 처리
+		include fastcgi_params;  # FastCGI 매개변수 포함
+	}
+	
+	location ~ /\.ht {
+		deny all;  # .htaccess 파일에 대한 액세스 거부
+	}
+	
+	error_page 497 https://$host/index.php;  # 497 오류 코드에 대해 제공할 페이지 지정
+	}
+   </div>
+   <p>설명:</p>
+   <ul>
+       <li><code>listen</code> 지시어: 서버가 포트 443(HTTPS)에서 수신 대기하고 기본 서버로 동작합니다.</li>
+       <li><code>server_name</code> 지시어: 서버의 도메인 이름을 지정합니다. 예시에서는 <code>example.com</code>이 사용되었습니다.</li>
+       <li><code>ssl_certificate</code>와 <code>ssl_certificate_key</code> 지시어: SSL 인증서와 개인 키 파일의 경로를 지정합니다.</li>
+       <li><code>ssl_protocols</code> 지시어: 허용되는 SSL 프로토콜을 설정합니다. 여기서는 TLSv1.2와 TLSv1.3이 사용됩니다.</li>
+       <li><code>root</code> 지시어: WordPress 설치 디렉토리의 루트 경로를 설정합니다.</li>
+       <li><code>index</code> 지시어: 우선순위에 따라 인덱스 파일을 지정합니다.</li>
+       <li>첫 번째 <code>location</code> 블록: 정적 파일 요청을 처리합니다. HTTPS 체계인 경우 gzip 압축을 비활성화합니다. <code>try_files</code> 지시어는 요청된 URI를 제공하거나, 찾을 수 없는 경우 404 오류로 폴백합니다.</li>
+       <li>두 번째 <code>location</code> 블록: PHP 파일을 처리합니다. FastCGI 설정을 포함하고 요청을 PHP-FPM 소켓으로 전달합니다. 또한 오류를 가로채고 FastCGI 매개변수를 포함합니다.</li>
+       <li>세 번째 <code>location</code> 블록: <code>.htaccess</code> 파일에 대한 액세스를 거부합니다.</li>
+       <li><code>error_page</code> 지시어: 497 오류 코드에 대해 제공할 페이지를 지정합니다. 이는 서버가 응답을 보내기 전에 클라이언트가 연결을 닫을 때 트리거됩니다.</li>
+   </ul>
+</body>
+</html>
