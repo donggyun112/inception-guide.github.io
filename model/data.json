@@ -409,7 +409,7 @@
 		"data": {"id": "MariaDB->MariaDB-foreground", "source": "MariaDB-foreground", "target": "MariaDB"}
 	},
 	{
-		"data": {"id": "MariaDB->MariaDB-Worpress", "source": "MariaDB", "target": "MariaDB-Worpress"}
+		"data": {"id": "MariaDB->MariaDB-Worpress", "source": "MariaDB-Worpress", "target": "MariaDB"}
 	},
 	{
 		"data": {"id": "Wordpress->MariaDB-Worpress", "source": "MariaDB-Worpress", "target": "Wordpress"}
