@@ -1,0 +1,202 @@
+<html>
+<head>
+ <style>
+   body {
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 20px;
+   }
+   h1 {
+     color: #333;
+   }
+   h2 {
+     color: #666;
+   }
+   p {
+     line-height: 1.6;
+   }
+   pre {
+     background-color: #f4f4f4;
+     padding: 10px;
+     overflow-x: auto;
+   }
+   .path {
+     background-color: #f1f1f1;
+     padding: 10px;
+     font-weight: bold;
+     margin-bottom: 20px;
+   }
+ </style>
+</head>
+<body>
+ <div class="path">
+   경로: /etc/nginx/sites-available
+ </div>
+ 
+ <h1>Nginx 서버 설정 방법</h1>
+ 
+ <h2>1. 서버 블록 (Server Block)</h2>
+ <p>
+   server 블록은 Nginx에서 가상 호스트(Virtual Host)를 정의하는 데 사용됩니다.
+   가상 호스트란 하나의 물리적인 서버에서 여러 개의 웹사이트를 호스팅할 수 있도록 해주는 기능입니다.
+   각 server 블록은 특정 도메인이나 IP 주소에 대한 설정을 포함하며, 서로 다른 웹사이트에 대한 요청을 처리할 수 있습니다.
+ </p>
+ <pre>
+server {
+ # 서버 블록 내부에는 해당 가상 호스트에 대한 설정들이 위치합니다.
+}
+ </pre>
+ 
+ <h2>2. listen 지시어</h2>
+ <p>
+   listen 지시어는 Nginx 서버가 클라이언트의 요청을 수신 대기할 IP 주소와 포트를 지정합니다.
+   예를 들어, "listen 80;"은 서버가 80 포트에서 HTTP 요청을 수신 대기한다는 것을 의미합니다.
+   "listen 443 ssl;"은 서버가 443 포트에서 HTTPS 요청을 수신 대기한다는 것을 나타냅니다.
+ </p>
+ <pre>
+listen 80;
+listen 443 ssl;
+ </pre>
+ 
+ <h2>3. server_name 지시어</h2>
+ <p>
+   server_name 지시어는 해당 서버 블록이 처리할 도메인 이름을 지정합니다.
+   클라이언트가 요청한 도메인 이름과 server_name에 지정된 도메인 이름이 일치하는 경우, 해당 서버 블록의 설정이 적용됩니다.
+   여러 개의 도메인을 공백으로 구분하여 지정할 수 있으며, 와일드카드(*)를 사용하여 서브도메인을 포함한 도메인 패턴을 지정할 수도 있습니다.
+ </p>
+ <pre>
+server_name example.com www.example.com;
+server_name *.example.com;
+ </pre>
+ 
+ <h2>4. root 지시어</h2>
+ <p>
+   root 지시어는 웹 페이지의 루트 디렉토리를 지정합니다.
+   클라이언트 요청에 대해 제공할 파일들이 위치한 기본 디렉토리를 설정하는 것입니다.
+   예를 들어, "root /var/www/example.com;"은 "/var/www/example.com" 디렉토리를 웹 페이지의 루트 디렉토리로 설정합니다.
+   클라이언트가 "http://example.com/index.html"을 요청하면, Nginx는 "/var/www/example.com/index.html" 파일을 찾아 제공합니다.
+ </p>
+ <pre>
+root /var/www/example.com;
+ </pre>
+ 
+ <h2>5. index 지시어</h2>
+ <p>
+   index 지시어는 클라이언트가 디렉토리 URL에 접근했을 때 기본적으로 표시할 파일의 이름을 지정합니다.
+   예를 들어, 사용자가 "http://example.com/docs/" 와 같은 URL에 접근하면, Nginx는 해당 디렉토리 내에서 index 지시어에 지정된 파일을 찾아 반환합니다.
+   일반적으로 "index.html"이나 "index.php"와 같은 파일명이 사용됩니다.
+ </p>
+ <p>
+   여러 개의 파일명을 공백으로 구분하여 지정할 수 있으며, Nginx는 지정된 순서대로 파일의 존재 여부를 확인합니다.
+   예를 들어, 다음과 같이 설정하면 Nginx는 먼저 "index.html" 파일을 찾고, 없으면 "index.php" 파일을 찾습니다.
+ </p>
+ <pre>
+index index.html index.php;
+ </pre>
+ <p>
+   만약 index 지시어가 설정되어 있지 않으면, Nginx는 디렉토리 URL에 대한 요청 시 403 Forbidden 오류를 반환하거나,
+   디렉토리 목록을 표시하도록 설정된 경우 디렉토리 내의 파일 목록을 보여줍니다.
+ </p>
+
+ <h2>6. location 블록</h2>
+ <p>
+   location 블록은 특정 URL 패턴에 대한 설정을 정의하는 데 사용됩니다.
+   클라이언트 요청의 URI(Uniform Resource Identifier)와 매칭되는 location 블록의 설정이 적용됩니다.
+   예를 들어, "location /"은 모든 요청에 대해 적용되는 기본 설정이고, "location /images/"는 "/images/" 디렉토리에 대한 요청에 대해 적용되는 설정입니다.
+ </p>
+ <pre>
+location / {
+ # 루트 URL에 대한 설정
+}
+
+location /images/ {
+ # "/images/" 디렉토리에 대한 설정
+}
+ </pre>
+ <p>
+   location 블록 내부에는 다양한 지시어를 사용하여 해당 URL 패턴에 대한 동작을 정의할 수 있습니다.
+   예를 들어, "try_files" 지시어를 사용하여 파일 존재 여부를 확인하고, "proxy_pass" 지시어를 사용하여 요청을 다른 서버로 전달할 수 있습니다.
+ </p>
+
+ <h2>7. try_files 지시어</h2>
+ <p>
+   try_files 지시어는 지정된 순서대로 파일이나 디렉토리의 존재 여부를 확인하고, 존재하는 경우 해당 파일을 제공하거나 디렉토리로 이동합니다.
+   파일이나 디렉토리가 존재하지 않는 경우, 마지막 매개변수로 지정된 URI로 내부 리다이렉션하거나 오류 페이지를 반환합니다.
+ </p>
+ <pre>
+location / {
+ try_files $uri $uri/ =404;
+}
+ </pre>
+ <p>
+   위의 예시에서는 요청된 URI($uri)에 해당하는 파일을 찾고, 없으면 디렉토리($uri/)를 찾습니다.
+   파일과 디렉토리 모두 존재하지 않는 경우, 404 오류 페이지를 반환합니다.
+ </p>
+
+ <h2>8. include 지시어</h2>
+ <p>
+   include 지시어는 다른 설정 파일을 포함시키는 데 사용됩니다.
+   이를 통해 설정을 모듈화하고 관리를 용이하게 할 수 있습니다.
+   예를 들어, Nginx의 FastCGI 관련 설정은 "fastcgi.conf" 파일에 정의되어 있는 경우가 많습니다.
+   이 파일을 server 블록 내에 포함시켜 FastCGI 설정을 적용할 수 있습니다.
+ </p>
+ <pre>
+include fastcgi.conf;
+ </pre>
+
+ <h2>9. fastcgi_pass 지시어</h2>
+ <p>
+   fastcgi_pass 지시어는 FastCGI 서버의 주소를 지정하는 데 사용됩니다.
+   FastCGI는 동적 콘텐츠를 처리하기 위한 인터페이스로, PHP와 같은 서버 사이드 프로그래밍 언어를 실행하는 데 사용됩니다.
+   Nginx는 FastCGI를 통해 PHP 요청을 PHP-FPM(FastCGI Process Manager)과 같은 FastCGI 서버로 전달합니다.
+ </p>
+ <pre>
+1. fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+
+2. fastcgi_pass container-name:port;
+ </pre>
+ <p>
+   위의 예시에서는 PHP-FPM 소켓 경로를 지정하여 FastCGI 요청을 처리하도록 설정합니다.
+   또는 컨테이너 이름과 포트 번호를 지정하여 FastCGI 요청을 다른 컨테이너로 전달할 수도 있습니다.
+ </p>
+
+ <h2>10. return 지시어</h2>
+ <p>
+   return 지시어는 지정된 상태 코드와 선택적으로 응답 본문을 반환하고 요청 처리를 종료합니다.
+   주로 리다이렉션을 수행하거나 간단한 응답을 반환하는 데 사용됩니다.
+ </p>
+ <pre>
+return 301 https://example.com$request_uri;
+ </pre>
+ <p>
+   위의 예시에서는 301 Permanent Redirect 상태 코드와 함께 "https://example.com$request_uri"로 리다이렉션을 수행합니다.
+   "$request_uri"는 현재 요청의 URI를 나타내는 변수로, 리다이렉션 시 원래의 URI를 유지하는 데 사용됩니다.
+ </p>
+
+ <h2>11. rewrite 지시어</h2>
+ <p>
+   rewrite 지시어는 요청 URI를 변경하고 내부 리다이렉션을 수행하는 데 사용됩니다.
+   정규표현식을 사용하여 URI 패턴을 매칭하고, 매칭된 URI를 다른 URI로 변경할 수 있습니다.
+   rewrite 지시어는 주로 URI 재작성, 동적 페이지 주소 변경, 접근 제어 등의 목적으로 사용됩니다.
+ </p>
+ <pre>
+rewrite ^/old-page.html$ /new-page.html permanent;
+ </pre>
+ <p>
+   위의 예시에서는 "/old-page.html" URI를 "/new-page.html"로 영구적으로 리다이렉션합니다.
+   "permanent" 플래그는 301 Permanent Redirect 상태 코드를 반환하도록 지정합니다.
+ </p>
+
+ <p>
+   이러한 지시어들을 조합하여 Nginx 서버 설정 파일을 작성합니다.
+   설정 파일은 가독성과 유지보수성을 고려하여 구성하는 것이 좋습니다.
+   주석을 활용하여 설정의 의도를 명확히 하고, 필요한 경우 설정을 별도의 파일로 분리하여 관리할 수 있습니다.
+ </p>
+ <p>
+   설정 파일을 수정한 후에는 반드시 Nginx 설정 테스트를 수행하여 문법 오류가 없는지 확인해야 합니다.
+   설정 테스트는 "nginx -t" 명령을 사용하여 수행할 수 있습니다.
+   테스트에 통과한 후에는 Nginx를 재시작하거나 설정을 다시 로드하여 변경 사항을 적용할 수 있습니다.
+ </p>
+
+</body>
+</html>

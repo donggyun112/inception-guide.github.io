@@ -1,0 +1,50 @@
+<html>
+<head>
+  <title>Nginx Dockerfile 작성 방식</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Nginx Dockerfile 작성 방식</h1>
+  <p>다음은 Nginx를 도커라이징하는 Dockerfile의 예시입니다:</p>
+  <pre>
+FROM debian:마지막에서 전 버전
+
+RUN apt-get 업데이트 && \
+    Nginx 설치 && \
+    인증서 저장할 폴더 생성 && install openssl && \
+    openssl 인증서 설치 openssl ~
+
+RUN html 파일 저장할 폴더 생성 /var/www/html
+
+COPY Ngix 설정 파일 복사 --> /etc/nginx/sites-available/
+
+COPY 실행할 스크립트 복사 --> setup.sh
+
+CMD 스크립트 실행 --> Nginx foreground 실행
+  </pre>
+  <p>이 Dockerfile은 다음과 같은 단계로 구성됩니다:</p>
+  <ol>
+    <li>기본 이미지로 Debian을 사용합니다. 버전은 마지막버전 기준으로 이전 버전을 사용합니다</li>
+    <li>apt-get을 사용하여 Nginx를 설치하고 SSL 인증서를 생성하기 위해 OpenSSL을 설치합니다.</li>
+    <li>웹 콘텐츠를 저장할 디렉토리인 /var/www/html을 생성합니다.</li>
+    <li>Nginx 설정 파일을 도커 이미지에 복사합니다.</li>
+    <li>setup.sh 스크립트를 도커 이미지에 복사합니다.</li>
+    <li>CMD 명령어를 사용하여 컨테이너가 시작될 때 setup.sh 스크립트를 실행합니다.</li>
+	<li>setup.sh 스크립트는 Nginx를 포그라운드 모드로 실행합니다.</li>
+  </ol>
+  <p>이 Dockerfile은 Nginx를 설치하고 SSL 인증서를 생성하며, 필요한 디렉토리와 설정 파일을 준비합니다. 마지막으로 setup.sh 스크립트를 실행하여 추가 설정을 수행할 수 있습니다.</p>
+  <p>실제 사용 시에는 example.com과 같은 값을 실제 도메인 이름이나 적절한 값으로 대체해야 합니다.</p>
+</body>
+</html>

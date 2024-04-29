@@ -1,0 +1,41 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    padding: 20px;
+}
+
+pre {
+    background-color: #282c34;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+code {
+    font-size: 16px;
+}
+
+.comment {
+    color: #6a9955;
+}
+
+.keyword {
+    color: #569cd6;
+}
+
+.string {
+    color: #ce9178;
+}
+
+.service {
+    color: #4ec9b0;
+}
+
+.volume {
+    color: #9cdcfe;
+}
+
+.network {
+    color: #c586c0;
+}

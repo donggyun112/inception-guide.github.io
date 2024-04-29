@@ -1,0 +1,78 @@
+<html>
+<head>
+ <title>Bash 스크립트 설명</title>
+ <style>
+   body {
+     font-family: Arial, sans-serif;
+     margin: 20px;
+   }
+   h1 {
+     color: #333;
+   }
+   pre {
+     background-color: #f4f4f4;
+     padding: 10px;
+     border-radius: 5px;
+   }
+   p {
+     line-height: 1.5;
+   }
+ </style>
+</head>
+<body>
+ <h1>Bash 스크립트 설명</h1>
+ 
+ <h2>1. WordPress 데이터베이스 생성 대기</h2>
+ <pre>
+until mysql -h"mariadb" -u"DB_USER" -p"DB_PASSWORD" -e "SHOW DATABASES;" | grep -q "DB_NAME"; do
+ echo "Waiting for WordPress database creation..." > /var/www/html/wordpress/error/log.txt
+ sleep 3
+done
+ </pre>
+ <p>
+	mysql -h"hostname" -u"username" -p"password" -e "SQL query" <br>
+	mysql 명령어를 사용하여 MariaDB 데이터베이스 서버에 연결할 수 있습니다
+   이 부분에서는 WordPress 데이터베이스가 생성될 때까지 대기합니다. 3초마다 데이터베이스 목록을 확인하고, "wordpress" 데이터베이스가 존재할 때까지 반복합니다. 대기 중에는 로그 파일에 메시지를 기록합니다.
+ </p>
+
+ <h2>2. WordPress 데이터베이스 연결</h2>
+ <pre>
+echo "connect to WordPress database" >> /var/www/html/wordpress/error/log.txt
+sleep 3
+ </pre>
+ <p>
+   WordPress 데이터베이스에 연결되었음을 로그 파일에 기록하고, 3초 동안 대기합니다.
+ </p>
+
+ <h2>3. WordPress 설정 파일 및 데이터 생성</h2>
+ <pre>
+if [ ! -f /var/www/html/wordpress/wp-config.php ] || ! mysql -h"mariadb" -u"$DB_USER" -p"$DB_PASSWORD" -D"$DB_NAME" -e "SHOW TABLES;" | grep -q -E "(wp_posts|wp_users|wp_options)"; then
+ echo "Create wordpress Data" >> /var/www/html/wordpress/error/log.txt
+ cd /var/www/html/wordpress && \
+ sudo -u www-data wp config create --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASSWORD --dbhost=mariadb --path=/var/www/html/wordpress --skip-check >> /var/www/html/wordpress/error/log.txt
+ cd /var/www/html/wordpress && \
+ sudo -u www-data -s wp core install --url=$WORDPRESS_URL --title="My WordPress Site" --admin_user=$WORDPRESS_ADMIN_USER --admin_password=$WORDPRESS_ADMIN_PASSWORD --admin_email=$WORDPRESS_ADMIN_EMAIL --locale=ko_KR >> /var/www/html/wordpress/error/log.txt
+ cd /var/www/html/WordPress && \
+ sudo -u www-data -s wp user create $WORDPRESS_USER $ID@example.com --user_pass=$WORDPRESS_USER_PASSWORD >> /var/www/html/wordpress/error/log.txt
+fi
+ </pre>
+ <p>
+   이 부분에서는 WordPress 설정 파일(wp-config.php)이 없거나 필수 테이블(wp_posts, wp_users, wp_options)이 존재하지 않는 경우에만 실행됩니다. WordPress 데이터 생성 메시지를 로그 파일에 기록한 후, 다음 작업을 수행합니다:
+   <ul>
+     <li>wp-config.php 파일 생성</li>
+     <li>WordPress 코어 설치</li>
+     <li>관리자 사용자 생성</li>
+     <li>일반 사용자 생성</li>
+   </ul>
+   각 작업의 출력은 로그 파일에 추가됩니다.
+ </p>
+
+ <h2>4. PHP-FPM 실행</h2>
+ <pre>
+php-fpm7.4 -F
+ </pre>
+ <p>
+   마지막으로, PHP-FPM 7.4 버전을 foreground 모드로 실행합니다. 이를 통해 PHP 코드를 처리할 수 있습니다.
+ </p>
+</body>
+</html>
