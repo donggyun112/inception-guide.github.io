@@ -37791,7 +37791,7 @@ fetch('./model/data.json', {
   // elements들의 rank들입니다.
 
   /// 변경된 부분
-  var nodeMaxSize = 50;
+  var nodeMaxSize = 400;
   var nodeMinSize = 5;
   var nodeActiveSize = 28;
   var fontMaxSize = 8;

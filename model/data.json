@@ -303,8 +303,9 @@
 	{
 		"data": {
 			"id": "Nginx-install",
-			"url": "https://juhpark.tistory.com/20",
-			"label": "Nginx 설치"
+			"url": "",
+			"label": "Nginx 설치",
+			"localPath": "./nginx/nginx-install.html"
 		}
 	},
 	{
@@ -344,16 +345,16 @@
 		"data": {"id": "Inception->Nginx", "source": "Nginx", "target": "Inception"}
 	},
 	{
-		"data": {"id": "Nginx->Nginx-Config", "source": "Nginx-Config", "target": "Nginx"}
+		"data": {"id": "Nginx->Nginx-Config", "source": "Nginx-Config", "target": "Nginx-install"}
 	},
 	{
 		"data": {"id": "Nginx->WebServer", "source": "WebServer", "target": "Nginx"}
 	},
 	{
-		"data": {"id": "Nginx->sertificate", "source": "sertificate", "target": "Nginx"}
+		"data": {"id": "Nginx->sertificate", "source": "sertificate", "target": "Nginx-Docker"}
 	},
 	{
-		"data": {"id": "Nginx->Nginx-foreground", "source": "Nginx-foreground", "target": "Nginx"}
+		"data": {"id": "Nginx->Nginx-foreground", "source": "Nginx-foreground", "target": "Nginx-Docker"}
 	},
 	{
 		"data": {"id": "Nginx->Nginx.conf-diff-between-default.conf", "source": "Nginx.conf-diff-between-default.conf", "target": "Nginx-Config"}
