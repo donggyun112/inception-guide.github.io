@@ -37791,11 +37791,11 @@ fetch('./model/data.json', {
   // elements들의 rank들입니다.
 
   /// 변경된 부분
-  var nodeMaxSize = 50;
-  var nodeMinSize = 5;
+  var nodeMaxSize = 80;
+  var nodeMinSize = 10;
   var nodeActiveSize = 28;
-  var fontMaxSize = 8;
-  var fontMinSize = 5;
+  var fontMaxSize = 10;
+  var fontMinSize = 6;
   var fontActiveSize = 7;
   // node & font 크기 값
 
@@ -37822,39 +37822,69 @@ fetch('./model/data.json', {
     // container to render in
 
     elements: data,
-    style: [
-    // the stylesheet for the graph
-    {
+    style: [{
       selector: 'node',
       style: {
-        // 변경된 부분
-        'background-color': nodeColor,
-        //
+        'background-color': function backgroundColor(ele) {
+          if (ele.id() === 'Inception') {
+            return '#FFD700'; // Gold color for Inception node
+          } else if (ele.id() === 'Docker' || ele.id() === 'Wordpress' || ele.id() === 'Nginx' || ele.id() === 'MariaDB') {
+            return '#FF6347'; // Tomato color for major nodes
+          } else {
+            return nodeColor;
+          }
+        },
         'label': 'data(label)',
         'width': function width(ele) {
-          return nodeMaxSize * pageRank.rank('#' + ele.id()) + nodeMinSize;
+          if (ele.id() === 'Inception') {
+            return nodeMaxSize * 1.5; // Largest size for Inception node
+          } else if (ele.id() === 'Docker' || ele.id() === 'Wordpress' || ele.id() === 'Nginx' || ele.id() === 'MariaDB') {
+            return nodeMaxSize; // Large size for major nodes
+          } else {
+            return nodeMaxSize * pageRank.rank('#' + ele.id()) + nodeMinSize;
+          }
         },
         'height': function height(ele) {
-          return nodeMaxSize * pageRank.rank('#' + ele.id()) + nodeMinSize;
+          if (ele.id() === 'Inception') {
+            return nodeMaxSize * 1.5; // Largest size for Inception node
+          } else if (ele.id() === 'Docker' || ele.id() === 'Wordpress' || ele.id() === 'Nginx' || ele.id() === 'MariaDB') {
+            return nodeMaxSize; // Large size for major nodes
+          } else {
+            return nodeMaxSize * pageRank.rank('#' + ele.id()) + nodeMinSize;
+          }
         },
         'font-size': function fontSize(ele) {
-          return fontMaxSize * pageRank.rank('#' + ele.id()) + fontMinSize;
+          if (ele.id() === 'Inception') {
+            return fontMaxSize * 1.5; // Largest font size for Inception node
+          } else if (ele.id() === 'Docker' || ele.id() === 'Wordpress' || ele.id() === 'Nginx' || ele.id() === 'MariaDB') {
+            return fontMaxSize; // Large font size for major nodes
+          } else {
+            return fontMaxSize * pageRank.rank('#' + ele.id()) + fontMinSize;
+          }
         },
-        // 추가된 부분
-        'color': nodeColor
-        //
+        'color': function color(ele) {
+          if (ele.id() === 'Inception' || ele.id() === 'Docker' || ele.id() === 'Wordpress' || ele.id() === 'Nginx' || ele.id() === 'MariaDB') {
+            return '#FFFFFF'; // White color for major nodes
+          } else {
+            return nodeColor;
+          }
+        },
+        'text-wrap': 'wrap',
+        'text-max-width': '100px',
+        'text-valign': 'center',
+        'text-halign': 'center'
       }
     }, {
       selector: 'edge',
       style: {
-        // 변경된 부분
         'width': edgeWidth,
-        'curve-style': 'bezier',
+        'curve-style': 'unbundled-bezier',
+        'control-point-distances': [20, 20, 20, 20],
+        'control-point-weights': [0.25, 0.25, 0.25, 0.25],
         'line-color': edgeColor,
         'source-arrow-color': edgeColor,
-        'source-arrow-shape': 'vee',
+        'source-arrow-shape': 'triangle',
         'arrow-scale': arrowScale
-        //
       }
     }],
     layout: {
