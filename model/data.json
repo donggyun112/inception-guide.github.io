@@ -301,6 +301,13 @@
 		}
 	},
 	{
+		"data": {
+			"id": "Nginx-install",
+			"url": "https://juhpark.tistory.com/20",
+			"label": "Nginx 설치"
+		}
+	},
+	{
 		"data": {"id": "Inception->Docker", "source": "Docker", "target": "Inception"}
 	},
 	{
@@ -419,6 +426,9 @@
 	},
 	{
 		"data": {"id": "MariaDB->MariaDB-Volumn", "source": "MariaDB-Volumn", "target": "MariaDB"}
+	},
+	{
+		"data": {"id": "Nginx->Nginx-install", "source": "Nginx-install", "target": "Nginx"}
 	}
 	
 ]
