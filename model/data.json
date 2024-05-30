@@ -55,7 +55,7 @@
 			"id": "Docker-Compose-Example",
 			"url": "",
 			"label": "Docker Compose 예시",
-			"localPath": "./docker-compose-Docs.html"
+			"localPath": "./docker-compose-docs.html"
 		}
 	},
 	{
