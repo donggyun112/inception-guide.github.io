@@ -55,7 +55,7 @@
 			"id": "Docker-Compose-Example",
 			"url": "",
 			"label": "Docker Compose 예시",
-			"localPath": "./docker-compose-Docs.html"
+			"localPath": "./docker-compose-docs.html"
 		}
 	},
 	{
@@ -70,7 +70,7 @@
 			"id": "Docker-diff-between-Virtualmachine",
 			"url": "",
 			"label": "Docker와 가상머신의 차이",
-			"localPath": "/images/image.png"
+			"localPath": "./images/image.png"
 		}
 	},
 	{
@@ -85,7 +85,7 @@
 			"id": "Inception-relation-view",
 			"url": "",
 			"label": "Inception 관계도",
-			"localPath": "/images/example_diagram.png"
+			"localPath": "./images/example_diagram.png"
 		}
 	},
 	{
@@ -93,7 +93,7 @@
 			"id": "Nginx",
 			"url": "",
 			"label": "Nginx",
-			"localPath": "./Nginx/nginxguid.html"
+			"localPath": "./nginx/nginxguid.html"
 		}
 	},
 	{
@@ -101,7 +101,7 @@
 			"id": "Nginx-Config",
 			"url": "",
 			"label": "Nginx Config",
-			"localPath": "./Nginx/nginxconf.html"
+			"localPath": "./nginx/nginxconf.html"
 		}
 	},
 	{
@@ -116,7 +116,7 @@
 			"id": "sertificate",
 			"url": "",
 			"label": "SSL/TLS 인증서",
-			"localPath": "./Nginx/nginx-ssl.html"
+			"localPath": "./nginx/nginx-ssl.html"
 		
 		}
 	},
@@ -125,7 +125,7 @@
 			"id": "Nginx-foreground",
 			"url": "",
 			"label": "Nginx foreground",
-			"localPath": "./Nginx/nginx-front.html"
+			"localPath": "./nginx/nginx-front.html"
 		}
 	},
 	{
@@ -140,7 +140,7 @@
 			"id": "Nginx-config-example",
 			"url": "",
 			"label": "Nginx Config Example",
-			"localPath": "./Nginx/nginxconf-example.html"
+			"localPath": "./nginx/nginxconf-example.html"
 		}
 	},
 	{
@@ -148,7 +148,7 @@
 			"id": "Nginx-Docker",
 			"url": "",
 			"label": "Nginx Docker",
-			"localPath": "./Nginx/nginx-docker.html"
+			"localPath": "./nginx/nginx-docker.html"
 		}
 	},
 	{
@@ -156,7 +156,7 @@
 			"id": "Wordpress",
 			"url": "",
 			"label": "Wordpress",
-			"localPath": "./Wordpress/wordpress.html"
+			"localPath": "./wordpress/wordpress.html"
 		}
 	},
 	{
@@ -171,7 +171,7 @@
 			"id": "Wordpress-install",
 			"url": "",
 			"label": "Wordpress 설치",
-			"localPath": "./Wordpress/wordpress-install.html"
+			"localPath": "./wordpress/wordpress-install.html"
 		}
 	},
 	{
@@ -179,7 +179,7 @@
 			"id": "Wordpress-CLI",
 			"url": "",
 			"label": "Wordpress CLI",
-			"localPath": "./Wordpress/wordpress-cli.html"
+			"localPath": "./wordpress/wordpress-cli.html"
 		}
 	},
 	{
@@ -194,7 +194,7 @@
 			"id": "CLI-Docs",
 			"url": "",
 			"label": "Wordpress CLI 사용방법",
-			"localPath": "./Wordpress/wordpress-cli-docs.html"
+			"localPath": "./wordpress/wordpress-cli-docs.html"
 		}
 	},
 	{
@@ -202,7 +202,7 @@
 			"id": "Wordpress-Config",
 			"url": "",
 			"label": "Wordpress Config",
-			"localPath": "./Wordpress/wordpress-config.html"
+			"localPath": "./wordpress/wordpress-config.html"
 		}
 	},
 	{
@@ -210,7 +210,7 @@
 			"id": "PHP",
 			"url": "",
 			"label": "PHP-FPM",
-			"localPath": "./Wordpress/php.html"
+			"localPath": "./wordpress/php.html"
 		}
 	},
 	{
@@ -218,7 +218,7 @@
 			"id": "Nginx-Wordpress",
 			"url": "",
 			"label": "Nginx Wordpress 연동",
-			"localPath": "./Connect/nginx-wordpress-connect.html"
+			"localPath": "./connect/nginx-wordpress-connect.html"
 		}
 	},
 	{
@@ -226,7 +226,7 @@
 			"id": "PHP-foreground",
 			"url": "",
 			"label": "PHP foreground",
-			"localPath": "./Wordpress/php-front.html"
+			"localPath": "./wordpress/php-front.html"
 		}
 	},
 	{
@@ -234,7 +234,7 @@
 			"id": "Wordpress-docker",
 			"url": "",
 			"label": "Wordpress Docker",
-			"localPath": "./Wordpress/wordpress-docker.html"
+			"localPath": "./wordpress/wordpress-docker.html"
 		}
 	},
 	{
@@ -242,7 +242,7 @@
 			"id": "MariaDB",
 			"url": "",
 			"label": "MariaDB",
-			"localPath": "./MariaDB/mariadb.html"
+			"localPath": "./mariadb/mariadb.html"
 		}
 	},
 	{
@@ -250,7 +250,7 @@
 			"id": "MariaDB-Config",
 			"url": "",
 			"label": "MariaDB Config",
-			"localPath": "./MariaDB/Mariadb-conf.html"
+			"localPath": "./mariadb/mariadb-conf.html"
 		}
 	},
 	{
@@ -265,7 +265,7 @@
 			"id": "SQL-CMD",
 			"url": "",
 			"label": "SQL CMD",
-			"localPath": "./MariaDB/MariaDB-cmd.html"
+			"localPath": "./mariadb/mariadb-cmd.html"
 		}
 	},
 	{
@@ -273,7 +273,7 @@
 			"id": "MariaDB-foreground",
 			"url": "",
 			"label": "MariaDB foreground",
-			"localPath": "./MariaDB/mariadb-front.html"
+			"localPath": "./mariadb/mariadb-front.html"
 		}
 	},
 	{
@@ -281,7 +281,7 @@
 			"id": "MariaDB-Docker",
 			"url": "",
 			"label": "MariaDB Docker",
-			"localPath": "./MariaDB/mariadb-docker.html"
+			"localPath": "./mariadb/mariadb-docker.html"
 		}
 	},
 	{
@@ -289,7 +289,7 @@
 			"id": "MariaDB-Worpress",
 			"url": "",
 			"label": "MariaDB Wordpress 연동",
-			"localPath": "./Connect/mariadb-wordpress-connect.html"
+			"localPath": "./connect/mariadb-wordpress-connect.html"
 		}
 	},
 	{
@@ -297,7 +297,15 @@
 			"id": "MariaDB-Volumn",
 			"url": "",
 			"label": "MariaDB Volumn",
-			"localPath": "./MariaDB/mariadb-volumn.html"
+			"localPath": "./mariadb/mariadb-volumn.html"
+		}
+	},
+	{
+		"data": {
+			"id": "Nginx-install",
+			"url": "",
+			"label": "Nginx 설치",
+			"localPath": "./nginx/nginx-install.html"
 		}
 	},
 	{
@@ -337,16 +345,16 @@
 		"data": {"id": "Inception->Nginx", "source": "Nginx", "target": "Inception"}
 	},
 	{
-		"data": {"id": "Nginx->Nginx-Config", "source": "Nginx-Config", "target": "Nginx"}
+		"data": {"id": "Nginx->Nginx-Config", "source": "Nginx-Config", "target": "Nginx-install"}
 	},
 	{
 		"data": {"id": "Nginx->WebServer", "source": "WebServer", "target": "Nginx"}
 	},
 	{
-		"data": {"id": "Nginx->sertificate", "source": "sertificate", "target": "Nginx"}
+		"data": {"id": "Nginx->sertificate", "source": "sertificate", "target": "Nginx-Docker"}
 	},
 	{
-		"data": {"id": "Nginx->Nginx-foreground", "source": "Nginx-foreground", "target": "Nginx"}
+		"data": {"id": "Nginx->Nginx-foreground", "source": "Nginx-foreground", "target": "Nginx-Docker"}
 	},
 	{
 		"data": {"id": "Nginx->Nginx.conf-diff-between-default.conf", "source": "Nginx.conf-diff-between-default.conf", "target": "Nginx-Config"}
@@ -409,7 +417,7 @@
 		"data": {"id": "MariaDB->MariaDB-foreground", "source": "MariaDB-foreground", "target": "MariaDB"}
 	},
 	{
-		"data": {"id": "MariaDB->MariaDB-Worpress", "source": "MariaDB", "target": "MariaDB-Worpress"}
+		"data": {"id": "MariaDB->MariaDB-Worpress", "source": "MariaDB-Worpress", "target": "MariaDB"}
 	},
 	{
 		"data": {"id": "Wordpress->MariaDB-Worpress", "source": "MariaDB-Worpress", "target": "Wordpress"}
@@ -419,6 +427,9 @@
 	},
 	{
 		"data": {"id": "MariaDB->MariaDB-Volumn", "source": "MariaDB-Volumn", "target": "MariaDB"}
+	},
+	{
+		"data": {"id": "Nginx->Nginx-install", "source": "Nginx-install", "target": "Nginx"}
 	}
 	
 ]

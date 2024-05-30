@@ -3,6 +3,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const { stat } = require("fs");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -11,15 +12,15 @@ module.exports = {
     path: path.resolve(__dirname, "build")
   },
   devServer: {
-	static: [
-	  {
-		directory: path.resolve(__dirname, "build"),
-	  },
-	  {
-		directory: path.resolve(__dirname, "public"),
-	  },
-	],
-	port: 9000,
+    static: [
+      {
+        directory: path.resolve(__dirname, "build"),
+      },
+      {
+        directory: path.resolve(__dirname, "public"),
+      },
+    ],
+    port: 9000,
   },
   mode: "none",
   module: {
@@ -70,6 +71,17 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'style.css'
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'public',
+          to: '.',
+          globOptions: {
+            ignore: ['**/index.html']
+          }
+        }
+      ]
+    })
   ]
 };

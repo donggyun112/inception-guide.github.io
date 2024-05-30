@@ -96,7 +96,7 @@ fetch('./model/data.json', { mode: 'no-cors' })
 		// elements들의 rank들입니다.
 		
 		/// 변경된 부분
-		const nodeMaxSize = 50;
+		const nodeMaxSize = 400;
 		const nodeMinSize = 5;
 		const nodeActiveSize = 28;
 		const fontMaxSize = 8;
