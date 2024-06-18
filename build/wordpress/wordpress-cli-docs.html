@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>WP-CLI 사용법</title>
+ <style>
+   body {
+     font-family: 'Noto Sans KR', sans-serif;
+     line-height: 1.6;
+     color: #333;
+     margin: 0;
+     padding: 20px;
+   }
+   h1, h2, h3 {
+     margin-top: 30px;
+   }
+   pre {
+     background-color: #f4f4f4;
+     padding: 10px;
+     overflow-x: auto;
+   }
+   code {
+     font-family: 'Courier New', Courier, monospace;
+   }
+   .command {
+     margin-bottom: 20px;
+   }
+   .command p {
+     margin: 5px 0;
+   }
+   .description {
+     margin-left: 20px;
+   }
+   .important {
+     background-color: #fff3cd;
+     padding: 20px;
+     margin-bottom: 20px;
+     border-radius: 5px;
+   }
+ </style>
+</head>
+<body>
+ <h1>WP-CLI 사용법</h1>
+ <p>WP-CLI는 WordPress 명령줄 인터페이스로, 다양한 작업을 터미널에서 수행할 수 있게 해줍니다. 아래는 WP-CLI를 사용하여 WordPress를 설정하고 관리하는 몇 가지 예시입니다.</p>
+
+ <div class="important">
+   <h2>sudo -u www-data 사용의 중요성</h2>
+   <p>WP-CLI 명령을 실행할 때 <code>sudo -u www-data</code>를 사용하는 것이 중요합니다. 이는 웹 서버 사용자(www-data)의 권한으로 명령을 실행하기 위함입니다. WordPress 파일과 디렉토리는 웹 서버 사용자가 소유하고 있으므로, 이 사용자의 권한으로 WP-CLI 명령을 실행해야 파일 및 디렉토리 수정 시 권한 문제를 방지할 수 있습니다. 
+	<br>!www-data user의 권한을 /var/www/에 부여했다는 조건이 필요하며 권한을 부여한 경우 해당 폴더에 접근해서 sudo를 사용해야합니다!</br>
+   </p>
+ </div>
+
+ <div class="command">
+   <h2>WordPress 구성 파일 생성</h2>
+   <p>
+	<strong>PATH : /var/www/html/wp-config-sample.php</strong><br>
+	<img src="../images/wp-config-sample.png" alt="/var/www/html/wp-config-sample.php" width="50%">
+   </br>
+   </p>
+   <pre><code>cd /var/www/html/wordpress && \
+sudo -u www-data wp config create --dbname=DB_NAME --dbuser=DB_USER --dbpass=DB_PASSWORD --dbhost=mariadb --path=/var/www/html/wordpress --skip-check</code></pre>
+   <p class="description">이 명령은 WordPress 구성 파일인 wp-config.php를 생성합니다. 데이터베이스 정보와 WordPress 경로를 인수로 전달합니다.</p>
+ </div>
+
+ <div class="command">
+   <h2>WordPress 초기설정</h2>
+   <pre><code>cd /var/www/html/wordpress && \
+sudo -u www-data wp core install --url=WORDPRESS_URL --title="Site Name" --admin_user=WORDPRESS_ADMIN_USER --admin_password=WORDPRESS_ADMIN_PASSWORD --admin_email=WORDPRESS_ADMIN_EMAIL --locale=ko_KR</code></pre>
+   <p class="description">이 명령은 WordPress 초기 설정을 수행합니다. 사이트 URL, 제목, 관리자 계정 정보 등을 인수로 전달합니다.</p>
+ </div>
+
+ <div class="command">
+   <h2>WordPress 사용자 생성</h2>
+   <pre><code>cd /var/www/html/wordpress && \
+sudo -u www-data wp user create WORDPRESS_USER Name@example.com --user_pass=WORDPRESS_USER_PASSWORD</code></pre>
+   <p class="description">이 명령은 새로운 WordPress 사용자를 생성합니다. 사용자 이름, 이메일, 비밀번호를 인수로 전달합니다.</p>
+ </div>
+
+ <p>위의 명령들은 WP-CLI를 사용하여 WordPress를 설정하고 관리하는 기본적인 예시입니다. WP-CLI는 이 외에도 플러그인 및 테마 관리, 데이터베이스 조작, 콘텐츠 가져오기 및 내보내기 등 다양한 기능을 제공합니다. 항상 <code>sudo -u www-data</code>를 사용하여 웹 서버 사용자의 권한으로 WP-CLI 명령을 실행하는 것을 잊지 마세요.</p>
+<div class="command">
+	  <h2>참고자료</h2>
+	  <p>Config 명령어에 대한 자세한 정보는 <a href="https://developer.wordpress.org/cli/commands/config/create/">공식 문서(config 생성)</a>를 참고하세요.</p>
+	  <p>Core 명령어에 대한 자세한 정보는 <a href="https://developer.wordpress.org/cli/commands/core/install/">공식 문서(core install)</a>를 참고하세요.</p>
+	  <p>User 명령어에 대한 자세한 정보는 <a href="https://developer.wordpress.org/cli/commands/user/create/">공식 문서(user 생성)</a>를 참고하세요.</p>
+</div>
+<footer>
+	<p>Copyright &copy; 2024. All rights reserved.</p>
+</footer>
+</body>
+</html>

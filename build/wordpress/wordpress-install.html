@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>WordPress 설치 가이드</title>
+ <style>
+   body {
+     font-family: 'Noto Sans KR', sans-serif;
+     line-height: 1.6;
+     color: #333;
+     margin: 0;
+     padding: 20px;
+   }
+   h1, h2, h3 {
+     margin-top: 30px;
+   }
+   pre {
+     background-color: #f4f4f4;
+     padding: 10px;
+     overflow-x: auto;
+   }
+   code {
+     font-family: 'Courier New', Courier, monospace;
+   }
+ </style>
+</head>
+<body>
+ <h1>WordPress 설치 가이드</h1>
+
+ <h2>1. WordPress를 위한 PHP 설치</h2>
+ <p>서버가 PHP 코드를 해석하고 실행할 수 있도록 하려면 WordPress 기능에 필수적인 몇 가지 필요한 확장 프로그램과 함께 PHP를 설치해야 합니다.</p>
+<p><strong><a href="https://tecadmin.net/how-to-install-php-on-debian-12/" target="_blank">PHP 설치 가이드</a>를 참조하여 PHP를 설치하세요.</strong></p>
+ <p>PHP를 설치하였다면 다음 명령을 실행하여 PHP 필수 확장 프로그램을 설치하세요.</p>
+ <pre><code>apt install php<string><</string>version>-fpm php<string><</string>version>-curl php<string><</string>version>-mbstring php<string><</string>version>-mysql php<string><</string>version>-fpm -y <br>
+	ex) apt install php7.4-fpm php7.4-curl php7.4-mbstring php7.4-mysql php7.4-fpm -y</code></pre>
+</code></pre>
+ <p>이 명령은 필수 확장 프로그램과 함께 PHP를 설치하여 서버가 WordPress의 동적 콘텐츠를 처리할 수 있도록 합니다. PHP는 WordPress의 백본 역할을 하며 스크립트 실행과 웹사이트의 원활한 기능을 가능하게 합니다. PHP가 성공적으로 설치되면 Linux 서버에서 WordPress 플랫폼을 지원할 준비가 된 것입니다.</p>
+ <p>다음 명령을 실행하여 설치된 PHP 버전을 확인할 수 있습니다.</p>
+ <pre><code>php --version</code></pre>
+
+ <h2>2. Linux에 WordPress 설치</h2>
+ <p>Linux에 WordPress를 설치하는 것은 매끄럽고 간단한 과정입니다. 오류 없이 WordPress를 설치하고 설정하려면 다음 명령을 순서대로 따르세요.</p>
+ <pre><code>sudo apt install wget unzip # PHP 설치 가이드에 따라 설치하였다면 wget은 설치되어있습니다</code></pre>
+ <p>이 명령은 Linux 서버에 WordPress를 성공적으로 설치하는 데 필요한 도구를 설치합니다.</p>
+ <p>다음 명령을 사용하여 WordPress의 최신 버전을 다운로드하세요.</p>
+ <pre><code>wget https://wordpress.org/latest.zip # 과제에서는 lastest보다 한단계 이번 버전을 설치하여야 합니다 <br>자세한 내용은 <a href="https://wordpress.org/news/category/releases/">wordpress releases</a>를 확인하세요</br></code></pre>
+ <p>이 명령은 공식 WordPress 사이트에서 최신 버전의 WordPress를 가져옵니다. 다음 명령으로 WordPress 아카이브의 압축을 풉니다.</p>
+ <pre><code>sudo unzip latest.zip</code></pre>
+ <p>이렇게 하면 설치를 위해 WordPress 파일에 액세스할 수 있도록 다운로드한 파일의 압축이 풀립니다.</p>
+ <p>-d path 옵션을 사용하여 unzip 명령을 실행하면 원하는 위치에 파일압축을 풀 수 있습니다.</p>
+ <p>WordPress 설정을 시작하려면 WordPress 디렉터리로 이동하세요.</p>
+ <pre><code>cd wordpress</code></pre>
+ <p>WordPress 파일을 웹 서버 디렉터리에 복사하세요.</p>
+ <pre><code>sudo cp -r * /var/www/html</code></pre>
+ <p>이렇게 하면 추출된 WordPress 파일이 웹 서버의 지정된 디렉터리로 전송됩니다.</p>
+ <p>다음으로 디렉터리로 이동하세요.</p>
+ <pre><code>cd /var/www/html</code></pre>
+ <p>존재하는 기본 인덱스 파일을 제거하세요.</p>
+ <pre><code>sudo rm -rf index.html</code></pre>
+ <p>Nginx 서버에 대한 적절한 소유권을 설정하세요.</p>
+ <pre><code>sudo chown -R www-data:www-data /var/www/</code></pre>
+ <p>이 명령은 웹 서버에 대한 적절한 권한을 보장하기 위해 WordPress 파일의 소유권을 조정합니다.
+	<p>
+		Nginx는 기본적으로 <strong>www-data</strong> 사용자로 실행되므로 이 명령은 웹 서버가 WordPress 파일에 액세스할 수 있도록 합니다.
+	</p>
+ </p>
+ <p>이러한 명령을 꼼꼼히 따르면 Linux 서버에 WordPress를 원활하게 설치할 수 있습니다. 웹 서버가 구성되고 WordPress 파일이 제자리에 있으면 사이트에서 설정 과정의 다음 단계를 진행할 준비가 된 것입니다.</p>
+ <footer>
+	<p>Copyright &copy; 2024. All rights reserved.</p>
+</footer>
+</body>
+</html>
